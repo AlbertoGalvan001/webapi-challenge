@@ -10,4 +10,18 @@ router.get('/', (req, res) => {
         })
 })
 
+router.get('/:id')
+
+
+function validateResId(req, res, next) {
+    const ResId = req.params.id;
+    if (!ResId) {
+        return res.status(400).json({ message: "You did not provide a project or action id in the URL" })
+    } if (isNaN(ResId)) {
+        return res.status(400).json({ message: "ID must be a number" })
+    }
+    next();
+}
+
+
 module.exports = router;
